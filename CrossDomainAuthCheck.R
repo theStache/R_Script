@@ -50,9 +50,9 @@ wrkstationNames <- subset(csv_read_in, grepl("*\\$", USERNAME_TARGET, ignore.cas
 print("SubsetBuilder")
 print(new <- Sys.time() - old)
 
-for(xlen in 1:length(svcNames)){if(match <- grep(svcNames$IP_WINDOWSEVENT[xlen],wrkstationNames$IP_WINDOWSEVENT)){if(svcNames$HOSTNAME_TARGET[xlen] != wrkstationNames$HOSTNAME_TARGET[match]){print((paste(svcNames[xlen,],wrkstationNames[match,])))}}}         
+checkMatch <- c("Domain","IP","Names")
+for(xlen in 1:length(svcNames)){if(match <- grep(svcNames$IP_WINDOWSEVENT[xlen],wrkstationNames$IP_WINDOWSEVENT)){if(svcNames$HOSTNAME_TARGET[xlen] != wrkstationNames$HOSTNAME_TARGET[match]){checkMatch <- rbind(checkMatch,(paste(svcNames[xlen,],wrkstationNames[match,])))}}}         
 
-
-#write.csv(checkMatch,outputfile, row.names = FALSE)
+write.csv(checkMatch,outputfile, row.names = FALSE)
 new <- Sys.time() - old
 print(new)
