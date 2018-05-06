@@ -1,6 +1,7 @@
 #Reads in CSV based on WinEvent 4768, selects column containing Username, Domain, IP.
-#
-#Use at own risk; Tyler Williams - tjwill86@gmail.com; 20180308 
+#Compares the IP and domain of a workstation with a domain of a service account utilizing the same IP to determine if 
+#there is any cross domain authenticaion attempts happening.
+#Use at own risk; Tyler Williams - tjwill86@gmail.com; 20180506 
 # :{
 
 ReformatIPs <- function(df, column_name) 
@@ -18,9 +19,8 @@ ReformatIPs <- function(df, column_name)
 old <- Sys.time()
 setwd("dir/contains/csv/")
 
-#inputfile = "KerbEventsEnterpriseQueryData.csv"
-#outputfile = "Rscript_ON_TESTDATA.csv"
-inputfile = "1000RowsKerbData.csv"
+inputfile = "KerbEventsEnterpriseQueryData.csv"
+outputfile = "Rscript_ON_TESTDATA.csv"
 csv_read_in <- read.csv(file=inputfile, stringsAsFactors = FALSE)
 print(Sys.time())
 csv_read_in$IP_WINDOWSEVENT <- ReformatIPs(csv_read_in, "IP_WINDOWSEVENT")
